@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://elruyrsy3ev6"]
+
+[ext_resource type="PackedScene" uid="uid://donf7vx7bwrfn" path="res://puzzle_item.tscn" id="2_feb5d"]
+
+[node name="Game" type="Node3D"]
+
+[node name="PuzzleItem" parent="." instance=ExtResource("2_feb5d")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.44295)

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://donf7vx7bwrfn"]
+
+[ext_resource type="ArrayMesh" uid="uid://d0kbj8rfjjbc" path="res://models/apple_a.res" id="1_e7d1g"]
+[ext_resource type="ArrayMesh" uid="uid://dp2e8hx63h2rh" path="res://models/apple_b.res" id="2_ry4s8"]
+
+[node name="PuzzleItem" type="Node3D"]
+
+[node name="NodeA" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NodeA"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = ExtResource("1_e7d1g")
+
+[node name="NodeB" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NodeB"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = ExtResource("2_ry4s8")

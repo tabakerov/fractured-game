@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="fractured"
-run/main_scene="uid://coj2knea8fpgo"
+run/main_scene="uid://elruyrsy3ev6"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
