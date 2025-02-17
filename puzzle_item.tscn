@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://donf7vx7bwrfn"]
+[gd_scene load_steps=4 format=3 uid="uid://donf7vx7bwrfn"]
 
 [ext_resource type="ArrayMesh" uid="uid://d0kbj8rfjjbc" path="res://models/apple_a.res" id="1_e7d1g"]
+[ext_resource type="Script" uid="uid://c41jlinw4se53" path="res://puzzle_item.gd" id="1_ry4s8"]
 [ext_resource type="ArrayMesh" uid="uid://dp2e8hx63h2rh" path="res://models/apple_b.res" id="2_ry4s8"]
 
 [node name="PuzzleItem" type="Node3D"]
+script = ExtResource("1_ry4s8")
 
 [node name="NodeA" type="Node3D" parent="."]
 

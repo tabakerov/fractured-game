@@ -77,7 +77,7 @@ func compute_disassembled_transform(original: Transform3D, local_dir: Vector3, i
 func _process(delta: float) -> void:
 	if solved:
 		return
-	var camera = get_viewport().get_camera()
+	var camera = get_viewport().get_camera_3d()
 	if camera:
 		# Определяем вектор взгляда камеры (в Godot направление взгляда – вдоль -Z)
 		var cam_forward: Vector3 = -camera.global_transform.basis.z.normalized()
