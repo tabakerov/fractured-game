@@ -44,17 +44,22 @@ func _ready() -> void:
 	
 	# Для вычислений смещения удобно перевести target_view_direction в локальное пространство объекта:
 	var local_target_dir: Vector3 = global_transform.basis.inverse() * target_view_direction
-	
+	var a_transform
+	var b_transform
 	# На основании сравнения dot-произведений назначаем половинкам «ближайшую» (near) и «удалённую» (far)
 	if dot_a > dot_b:
 		# half_a – ближе, half_b – дальше
-		half_a.transform = compute_disassembled_transform(assembled_transform_half_a, local_target_dir, true)
-		half_b.transform = compute_disassembled_transform(assembled_transform_half_b, local_target_dir, false)
+		a_transform = compute_disassembled_transform(assembled_transform_half_a, local_target_dir, true)
+		b_transform = compute_disassembled_transform(assembled_transform_half_b, local_target_dir, false)
 	else:
 		# half_b – ближе, half_a – дальше
-		half_b.transform = compute_disassembled_transform(assembled_transform_half_b, local_target_dir, true)
-		half_a.transform = compute_disassembled_transform(assembled_transform_half_a, local_target_dir, false)
+		b_transform = compute_disassembled_transform(assembled_transform_half_b, local_target_dir, true)
+		a_transform = compute_disassembled_transform(assembled_transform_half_a, local_target_dir, false)
 	
+	var tween = get_tree().create_tween().set_parallel(true)
+	tween.tween_property(half_a, "transform", a_transform, disassemble_animation_time)
+	tween.tween_property(half_b, "transform", b_transform, disassemble_animation_time)
+
 	# Добавляем объект в группу для GameManager, если требуется
 	add_to_group("puzzle_objects")
 
@@ -90,6 +95,6 @@ func _process(delta: float) -> void:
 func solve() -> void:
 	solved = true
 	# Анимируем возвращение половинок в исходное (собранное) состояние
-	var tween = get_tree().create_tween()
+	var tween = get_tree().create_tween().set_parallel(true)
 	tween.tween_property(half_a, "transform", assembled_transform_half_a, disassemble_animation_time)
 	tween.tween_property(half_b, "transform", assembled_transform_half_b, disassemble_animation_time)

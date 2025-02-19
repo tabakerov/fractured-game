@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://ykg06hfye70l"]
+
+[ext_resource type="Script" uid="uid://bc1vcvomblswm" path="res://puzzle_piece/recursive_part.gd" id="1_2vllx"]
+[ext_resource type="ArrayMesh" uid="uid://diwnyuygdtouj" path="res://models/parts_apple/a.res" id="2_hkk7v"]
+[ext_resource type="ArrayMesh" uid="uid://btetomdj41rwn" path="res://models/parts_apple/bb.res" id="3_i1d72"]
+[ext_resource type="ArrayMesh" uid="uid://dmo3yxskp24h6" path="res://models/parts_apple/baa.res" id="4_h578j"]
+[ext_resource type="ArrayMesh" uid="uid://c2fyysyoub8ro" path="res://models/parts_apple/bab.res" id="5_x7jql"]
+[ext_resource type="Script" uid="uid://ckig0b8jn0amq" path="res://puzzle_piece/split_guide.gd" id="6_hkk7v"]
+
+[sub_resource type="Environment" id="Environment_hkk7v"]
+
+[node name="RecursiveParts" type="Node3D"]
+
+[node name="Node3D" type="Node3D" parent="."]
+script = ExtResource("1_2vllx")
+isRoot = true
+
+[node name="A" type="MeshInstance3D" parent="Node3D"]
+mesh = ExtResource("2_hkk7v")
+
+[node name="Node3D2" type="Node3D" parent="Node3D"]
+script = ExtResource("1_2vllx")
+
+[node name="BB" type="MeshInstance3D" parent="Node3D/Node3D2"]
+mesh = ExtResource("3_i1d72")
+
+[node name="Node3D3" type="Node3D" parent="Node3D/Node3D2"]
+script = ExtResource("1_2vllx")
+
+[node name="BAA" type="MeshInstance3D" parent="Node3D/Node3D2/Node3D3"]
+mesh = ExtResource("4_h578j")
+
+[node name="BAB" type="MeshInstance3D" parent="Node3D/Node3D2/Node3D3"]
+mesh = ExtResource("5_x7jql")
+
+[node name="SplitGuide3" type="Node3D" parent="Node3D/Node3D2/Node3D3" node_paths=PackedStringArray("A", "B")]
+transform = Transform3D(-0.206546, -0.978437, 0, 0.978437, -0.206546, 0, 0, 0, 1, -0.436854, 0, -0.794795)
+script = ExtResource("6_hkk7v")
+A = NodePath("../BAA")
+B = NodePath("../BAB")
+Distance = 3.0
+
+[node name="SplitGuide2" type="Node3D" parent="Node3D/Node3D2" node_paths=PackedStringArray("A", "B")]
+transform = Transform3D(0.775914, 0, -0.630838, 0, 1, 0, 0.630838, 0, 0.775914, -0.0634032, 0, -0.384107)
+script = ExtResource("6_hkk7v")
+A = NodePath("../BB")
+B = NodePath("../Node3D3")
+Distance = 4.0
+
+[node name="SplitGuide1" type="Node3D" parent="Node3D" node_paths=PackedStringArray("A", "B")]
+transform = Transform3D(0.0183424, 0, -0.999832, 0, 1, 0, 0.999832, 0, 0.0183424, 0, 0, 0)
+script = ExtResource("6_hkk7v")
+A = NodePath("../A")
+B = NodePath("../Node3D2")
+Distance = 2.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.789191, 0.614147, 0, -0.614147, 0.789191, 2.38419e-07, 7.69479, 8.76324)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_hkk7v")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
